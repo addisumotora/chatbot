@@ -40,7 +40,7 @@ const Register = () => {
   return (
     <>
       <div className="flex justify-between w-full">
-        <div className="w-[35%]">
+        <div className="w-[100%] md:w-[35%]">
           <div className="flex min-h-full flex-1 flex-col justify-center al px-6 py-12 lg:px-8">
             <div className="flex flex-col items-center gap-0">
               <div className="rounded-md bg-[#6D31ED] text-white w-14 h-14 flex justify-center items-center text-[9px]">
@@ -166,7 +166,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="w-[65%] h-[100vh]">
+        <div className="w-[65%] hidden md:flex h-[100vh]">
           <img src="./images/image 129.png" className="h-full w-full" alt="" />
         </div>
       </div>
