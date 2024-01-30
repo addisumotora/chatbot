@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -158,7 +158,7 @@ const Register = () => {
                       href="#"
                       className="font-semibold text-[#15ABFF] hover:text-indigo-500"
                     >
-                      Don't have an account? Sign Up
+                      Do you have an account? <Link to="../login">Log In</Link>
                     </a>
                   </div>
                 </div>

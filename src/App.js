@@ -10,6 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" exact element={<Login />} />
+        <Route path="/login" exact element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/conversation" element={<Conversations />} />

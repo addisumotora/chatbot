@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,7 +35,7 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      navigate("/chat");
+      navigate("/conversation");
     } else {
       toast.error("ivalid cridential", {
         position: "top-right",
@@ -110,12 +110,12 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="flex justify-end mt-10 text-sm">
-                  <a
-                    href="#"
+                  <Link
+                    to="../reset-password"
                     className="font-semibold text-[#15ABFF] hover:text-indigo-500"
                   >
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
                 <div>
                   <button
@@ -126,10 +126,9 @@ const Login = () => {
                   </button>
                   <div className="flex mt-10 text-sm">
                     <a
-                      href="#"
                       className="font-semibold text-[#15ABFF] hover:text-indigo-500"
                     >
-                      Don't have an account? Sign Up
+                      Don't have an account? <Link to="/register">Sign Up</Link>
                     </a>
                   </div>
                 </div>
