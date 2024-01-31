@@ -32,7 +32,7 @@ const Conversations = () => {
     setTimeout(() => {
       selectedConversation?.message?.push(dummyMessage);
       setLoading(false);
-    }, 6000);
+    }, 3000);
   };
 
   const handleInput = () => {
@@ -50,7 +50,7 @@ const Conversations = () => {
           message: "Finished",
         });
         setLoading(false);
-      }, 6000);
+      }, 3000);
       setInputValue("");
     }
   };
