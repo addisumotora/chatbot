@@ -3,10 +3,12 @@ import SyncLoader from "react-spinners/SyncLoader";
 import { conversations } from "../utils/utils";
 import Sidebar from "./SideBar";
 import Hamburger from "hamburger-react";
-
+import { AuthContext } from "../Context";
+import { useContext } from "react";
 const options = ["Option A", "Option B", "Option C", "Option D"];
 
 const Conversations = () => {
+  const { logout } = useContext(AuthContext);
   const [selectedOption, setSelectedOption] = useState();
   const [selectedConversation, setSelectedConversation] = useState(
     conversations[0]
@@ -52,6 +54,13 @@ const Conversations = () => {
       setInputValue("");
     }
   };
+  const logOut = () => {
+    logout();
+  };
+
+  const handleConversationChange = (conve) => {
+    setSelectedConversation(conve);
+  };
 
   const sidebarToggle = () => {
     setOpen(!isOpen);
@@ -72,7 +81,10 @@ const Conversations = () => {
         <div className="rounded-md bg-[#6D31ED] text-white w-14 h-14 flex justify-center items-center text-[9px]">
           CHATBOT
         </div>
-        <div className=" px-6 py-3 rounded-md bg-[#6D31ED]  text-white flex justify-center items-center">
+        <div
+          onClick={logout}
+          className=" px-6 py-3 rounded-md bg-[#6D31ED]  text-white flex justify-center items-center cursor-pointer"
+        >
           Logout
         </div>
       </div>
@@ -81,18 +93,25 @@ const Conversations = () => {
           conversations={conversations}
           setSelectedConversation={setSelectedConversation}
           selectedConversation={selectedConversation}
+          handleConversationChange={handleConversationChange}
         />
         <div className="w-full flex flex-col">
           <div className="rounded-md shadow-lg h-full">
             <div className="bg-[#15ABFF] rounded-md flex  justify-between items-center  p-3 text-white">
               <div className="flex gap-4 items-center">
-                { !isOpen && <img src="./images/Image 126.png" />}
+                {!isOpen && (
+                  <img src="./images/Image 126.png" alt="profimage" />
+                )}
                 {!isOpen && <p>Chatbot</p>}
                 {isOpen && <p>Conversations</p>}
               </div>
               <div className="md:hidden flex items-center gap-5">
-                {isOpen && <img src="./images/E add 13.png" />}
-                <Hamburger toggled={isOpen} onToggle={sidebarToggle} />
+                {isOpen && <img src="./images/E add 13.png" alt="addImage" />}
+                <Hamburger
+                  toggled={isOpen}
+                  onToggle={sidebarToggle}
+                  hideOutline={true}
+                />
               </div>
             </div>
             {isOpen ? (
@@ -116,7 +135,7 @@ const Conversations = () => {
                             className="flex justify-self-end"
                             src="./images/Image 126.png"
                             alt=""
-                          />{" "}
+                          />
                           <div className="w-[50%]">
                             <div className="w-fit">
                               <p className="mt-4 my-3 bg-[#F0F9FF] p-2 rounded-3xl text-[#15ABFF]">
@@ -134,7 +153,10 @@ const Conversations = () => {
                             </p>
                             <img src={message.url} alt="" />
                           </div>
-                          <img src="./images/Image 127.png" alt="" />{" "}
+                          <img
+                            src="./images/Image 127.png"
+                            alt="messageImage"
+                          />
                         </div>
                       )}
                     </div>
@@ -164,7 +186,7 @@ const Conversations = () => {
                   )}
                 </div>
                 {!selectedOption && (
-                  <div className="grid grid-cols-2 gap-1">
+                  <div className="grid grid-cols-2 gap-1 md:flex md:gap-2">
                     {options.map((option, index) => (
                       <button
                         onClick={() => setOption(option)}
@@ -191,7 +213,7 @@ const Conversations = () => {
               onClick={() => handleInput()}
               className="w-10 h-10 rounded-[50%] mr-5 bg-[#6D31ED] flex justify-center items-center"
             >
-              <img src="./images/Send message 1.png" />
+              <img src="./images/Send message 1.png" alt="" />
             </button>
           </div>
         </div>
@@ -200,4 +222,4 @@ const Conversations = () => {
   );
 };
 
-export default Conversations;  
+export default Conversations;

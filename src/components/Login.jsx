@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../Context";
 
 const user = {
   email: "addaa@gmail.com",
   password: "password123",
 };
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(loginSchema),
@@ -24,7 +24,10 @@ const Login = () => {
 
   const onSubmit = (data) => {
     if (data.email === user.email && data.password === user.password) {
-        console.log(data)
+      login({
+        email: "addaa@gmail.com",
+        password: "password123",
+      });
       toast.success("Login Successfull!", {
         position: "top-right",
         autoClose: 5000,
@@ -125,9 +128,7 @@ const Login = () => {
                     Log In
                   </button>
                   <div className="flex mt-10 text-sm">
-                    <a
-                      className="font-semibold text-[#15ABFF] hover:text-indigo-500"
-                    >
+                    <a className="font-semibold text-[#15ABFF] hover:text-indigo-500">
                       Don't have an account? <Link to="/register">Sign Up</Link>
                     </a>
                   </div>

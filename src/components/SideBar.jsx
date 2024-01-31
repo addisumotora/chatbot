@@ -2,13 +2,21 @@ import React from "react";
 
 const Sidebar = ({
   conversations,
-  setSelectedConversation,
   selectedConversation,
   isOpen,
+  handleConversationChange,
 }) => {
   return (
-    <div className={`w-[25%] rounded-md h-full md:block ${isOpen ? "w-[75%] mt-2" : "hidden"}`}>
-      <div className={`bg-[#15ABFF] ${isOpen ? "hidden":"block"} rounded-md flex justify-between p-5 text-white`}>
+    <div
+      className={`w-[25%] rounded-md h-full md:block ${
+        isOpen ? "w-[75%] mt-2" : "hidden"
+      }`}
+    >
+      <div
+        className={`bg-[#15ABFF] ${
+          isOpen ? "hidden" : "block"
+        } rounded-md flex justify-between p-5 text-white`}
+      >
         <p>Conversations</p>
         <img src="./images/E add 13.png" alt="prof" />
       </div>
@@ -16,7 +24,7 @@ const Sidebar = ({
         {conversations.map((conve) => (
           <div
             key={conve.id}
-            onClick={() => setSelectedConversation(conve)}
+            onClick={() => handleConversationChange(conve)}
             className={`${
               selectedConversation?.id === conve.id
                 ? "bg-[#6D31ED] text-white"
