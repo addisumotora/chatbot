@@ -20,7 +20,7 @@ const Conversations = () => {
   const setOption = (option) => {
     setSelectedOption(option);
     selectedConversation?.message?.push({ sender: "user", message: option });
-    console.log(selectedConversation);
+    selectedConversation.conversationStarted = true;
 
     const dummyMessage = {
       sender: "chatbot",
@@ -185,7 +185,7 @@ const Conversations = () => {
                     </div>
                   )}
                 </div>
-                {!selectedOption && (
+                {!selectedConversation.conversationStarted && (
                   <div className="grid grid-cols-2 gap-1 md:flex md:gap-2">
                     {options.map((option, index) => (
                       <button
