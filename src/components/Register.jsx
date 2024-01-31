@@ -34,7 +34,9 @@ const Register = () => {
         progress: undefined,
         theme: "light",
       });
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      },3000)
     } 
 
   return (

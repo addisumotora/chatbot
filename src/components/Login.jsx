@@ -38,7 +38,9 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
-      navigate("/conversation");
+      setTimeout(() => {
+        navigate("/conversation");
+      },3000)
     } else {
       toast.error("ivalid cridential", {
         position: "top-right",
