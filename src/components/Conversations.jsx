@@ -60,6 +60,7 @@ const Conversations = () => {
 
   const handleConversationChange = (conve) => {
     setSelectedConversation(conve);
+    console.log(conve)
   };
 
   const sidebarToggle = () => {

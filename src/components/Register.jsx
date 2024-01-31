@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../schemas";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-
+import "react-toastify/dist/ReactToastify.css";
+import { PulseLoader } from "react-spinners";
 
 const user = {
   email: "addaa@gmail.com",
@@ -13,6 +13,7 @@ const user = {
 };
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,21 +24,24 @@ const Register = () => {
   });
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       toast.success("user Registeration Successfull!", {
         position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+        autoClose: 3000,
       });
       setTimeout(() => {
         navigate("/");
-      },3000)
-    } 
+      }, 3000);
+    } catch (error) {
+      console.error("registration failed:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -153,7 +157,12 @@ const Register = () => {
                     type="submit"
                     className="flex w-full justify-center rounded-md bg-[#15ABFF] px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Sign Up
+                    {loading ? (
+                      <PulseLoader color
+                      ="white" loading={loading} size={20} />
+                    ) : (
+                      "Sing up"
+                    )}
                   </button>
                   <div className="flex mt-10 text-sm">
                     <a
