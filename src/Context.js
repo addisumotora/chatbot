@@ -1,26 +1,41 @@
 import { createContext, useReducer } from "react";
+import { conversations } from "./utils/utils";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem('user')) || null,
-  isAuthenticated: JSON.parse(localStorage.getItem('user')) ? true: false,
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isAuthenticated: JSON.parse(localStorage.getItem("user")) ? true : false,
+  conversations: conversations,
 };
 
 const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem('user', JSON.stringify(action.payload))
+      localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
         user: action.payload,
         isAuthenticated: true,
       };
     case "LOGOUT":
-      localStorage.clear()
+      localStorage.clear();
       return {
         ...state,
         user: null,
         isAuthenticated: false,
       };
+    case "ADD_CONVERSATION":
+      return {
+        ...state,
+        conversations: [...state.conversations, action.payload],
+      };
+    case "REMOVE_CONVERSATION":
+      return {
+        ...state,
+        conversations: state.conversations.filter(
+          (conve) => conve.id !== action.payload
+        ),
+      };
+
     default:
       return state;
   }
@@ -39,8 +54,18 @@ const AuthProvider = ({ children }) => {
     dispatch({ type: "LOGOUT" });
   };
 
+  const addConversation = (conversation) => {
+    dispatch({ type: "ADD_CONVERSATION", payload: conversation });
+  };
+
+  const removeConve = (id) => {
+    dispatch({ type: "REMOVE_CONVERSATION", payload: id });
+  };
+
   return (
-    <AuthContext.Provider value={{ ...state, login, logout }}>
+    <AuthContext.Provider
+      value={{ ...state, login, logout, removeConve, addConversation }}
+    >
       {children}
     </AuthContext.Provider>
   );
