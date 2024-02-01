@@ -31,14 +31,23 @@ const authReducer = (state, action) => {
     case "REMOVE_CONVERSATION":
       return {
         ...state,
-        conversations: state.conversations.filter(
-          (conve) => conve.id !== action.payload
-        ),
+        conversations: helperFn(state,action)
       };
 
     default:
       return state;
   }
+};
+
+const helperFn = (state, action) => {
+  const updatedConversations = state.conversations.filter(
+    (conve) => conve.id !== action.payload
+  ).map((conve) => ({
+    ...conve,
+    id: conve.id > action.payload ? conve.id - 1 : conve.id,
+  }));
+
+  return updatedConversations;
 };
 
 const AuthContext = createContext();

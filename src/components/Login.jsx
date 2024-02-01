@@ -28,7 +28,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (data.email === user.email && data.password === user.password) {
         login({

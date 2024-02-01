@@ -12,7 +12,7 @@ const Sidebar = ({
     addConversation({
       id: conversations.length + 1,
       name: "abel",
-      convname: `conversation ${conversations.length + 1}`,
+      convname: `conversation`,
       message: [{ sender: "chatbot", message: "How can I help you today?" }],
       conversationStarted: false,
     });
@@ -51,7 +51,7 @@ const Sidebar = ({
                 : "bg-[#DEE1E6] text-[#171A1F]"
             } rounded-md flex justify-between p-5 my-2 cursor-pointer`}
           >
-            <p>{conve.convname}</p>{" "}
+            <p>{conve.convname + " " + conve.id}</p>{" "}
             <img
               onClick={() => removeConversation(conve.id)}
               src="./images/trash 2.png"
